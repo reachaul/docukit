@@ -1,94 +1,204 @@
+<div align="center">
+
 # DocuKit
 
-**Your documents. Your device. Your privacy.**
+### Your Documents. Your Device. Your Privacy.
 
-DocuKit is a local-first Windows desktop document toolkit built with Python and PySide6. Made with care — **by reachaul**.
+A privacy-focused desktop document toolkit for Windows.
 
-- **Version:** 1.0.0
-- **Production year:** 2026
-- **Platform:** Windows 10/11 (source build)
-- **Processing:** Local on your computer; documents are not uploaded to a cloud service by this application.
+Convert documents, manage PDFs, and handle your files locally — without uploading your documents to cloud services.
 
-**GitHub repository:** https://github.com/reachaul/docukit
+**Made with care by reachaul**
 
-> Repository URL is the intended project address; it becomes active after you create the repository on GitHub and push this source.
+[Features](#features) · [Installation](#installation) · [Usage](#usage) · [Build](#building-from-source) · [Contributing](#contributing)
 
-## Features available in v1.0.0
+</div>
 
-### File Converter
-- PDF to JPG / PNG
-- JPG, PNG and WEBP to PDF
-- JPG, PNG and WEBP image conversion to JPG / PNG
-- PDF, DOCX, XLSX, PPTX, HTML, CSV and TXT to Markdown using the optional MarkItDown engine
+---
 
-### PDF Toolkit
-- Merge, split, extract pages, remove pages, rotate pages and reorder pages
-- PDF structural optimization and embedded raster image recompression
+## About DocuKit
 
-### Planned / not yet available
-- OCR Tools interface and preprocessing
-- PDF Editor tools
-- PDF to Word / Excel / PowerPoint
-- Office documents to PDF
+**DocuKit** is a Windows desktop application designed to make everyday document management easier, combining document conversion and PDF utilities in one place.
 
-Do not interpret placeholder navigation items as implemented features.
+Built with **Python** and **PySide6**, DocuKit provides a modern desktop interface while keeping document processing on your own computer.
 
-## Requirements
+### Key Highlights
 
-- Python 3.15 (the development environment used for this project; other versions have not been certified)
-- Windows 10/11
+* **Privacy-focused** — Document processing is designed to happen locally on your device.
+* **All-in-one toolkit** — Document conversion and PDF utilities in one application.
+* **Modern interface** — Clean desktop UI with drag-and-drop and file browsing.
+* **Offline-oriented** — No cloud upload is required for the application's core local processing features.
 
-## Setup
+## Features
+
+### 1. File Converter
+
+Convert supported document and image formats.
+
+| Conversion                        | Availability                              |
+| --------------------------------- | ----------------------------------------- |
+| PDF to JPG / PNG                  | Available                                 |
+| JPG / PNG / WEBP to PDF           | Available                                 |
+| JPG / PNG / WEBP image conversion | Available                                 |
+| PDF to Markdown                   | Available with optional MarkItDown engine |
+| DOCX to Markdown                  | Available with optional MarkItDown engine |
+| XLSX to Markdown                  | Available with optional MarkItDown engine |
+| PPTX to Markdown                  | Available with optional MarkItDown engine |
+| HTML / CSV / TXT to Markdown      | Available with optional MarkItDown engine |
+
+### 2. PDF Toolkit
+
+Manage PDF documents with practical utilities:
+
+* Merge PDF files
+* Split PDF documents
+* Extract selected pages
+* Remove unwanted pages
+* Rotate pages
+* Reorder pages
+* Compress and optimize PDF files
+
+### 3. Additional Tools
+
+The application interface also includes sections for OCR Tools and PDF Editor. These are planned for future development and are not yet available as functional tools in version 1.0.0.
+
+## Technology Stack
+
+* **Python 3.15** — Application development environment
+* **PySide6** — Desktop graphical user interface
+* **PyMuPDF** — PDF processing
+* **Pillow** — Image processing
+* **MarkItDown** — Optional document-to-Markdown conversion
+* **PyInstaller** — Windows executable packaging
+
+## Installation
+
+### Requirements
+
+* Windows 10 or Windows 11
+* Python 3.15 for running from source
+
+### 1. Clone the repository
+
+```powershell
+git clone https://github.com/reachaul/docukit.git
+cd docukit
+```
+
+### 2. Create a virtual environment
 
 ```powershell
 py -3.15 -m venv .venv
+```
+
+### 3. Install dependencies
+
+```powershell
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Optional Markdown conversion engine:
+### 4. Optional components
+
+For additional document-to-Markdown conversion support:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-converter.txt
 ```
 
-Optional OCR Python bridge (Tesseract OCR must also be installed separately; OCR UI is not yet available in this release):
+OCR dependencies can be installed separately. Tesseract OCR must also be installed on Windows. Note that the OCR interface is not yet functional in version 1.0.0.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-ocr.txt
 ```
 
-## Run from source
+## Usage
+
+Run DocuKit from the project directory:
 
 ```powershell
 .\.venv\Scripts\python.exe -m app.main
 ```
 
-## Build executable
+Once the application opens:
 
-Install the build and converter dependencies first:
+1. Select File Converter or PDF Toolkit.
+2. Add files using Browse or drag-and-drop.
+3. Select the desired operation.
+4. Configure the available options.
+5. Process and save the output to your chosen location.
+
+## Building from Source
+
+DocuKit uses PyInstaller to package the application for Windows.
+
+Install the build dependencies:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-converter.txt
 .\.venv\Scripts\python.exe -m pip install -r requirements-build.txt
 ```
 
-Then build on Windows:
+Build the application:
 
 ```powershell
 .\.venv\Scripts\pyinstaller.exe --clean --noconfirm DocuKit.spec
 ```
 
-The output is created under `dist/DocuKit/`. Test it on a Windows machine without the development environment before publishing a binary release.
+The build output is generated in:
 
-## Fonts and licenses
+```text
+dist/DocuKit/
+```
 
-DocuKit bundles Poppins SemiBold and DM Sans Regular/Medium under the SIL Open Font License. License texts are included in `assets/fonts/`.
+The resulting build should be tested on a separate Windows environment before distribution.
+
+## Project Status
+
+| Component                       | Status    |
+| ------------------------------- | --------- |
+| File Converter                  | Available |
+| PDF Toolkit                     | Available |
+| OCR Tools                       | Planned   |
+| PDF Editor                      | Planned   |
+| Windows executable distribution | Pending   |
+
+DocuKit is currently at **version 1.0.0**.
 
 ## Privacy
 
-File processing is designed to run locally. Optional engines and their dependencies must be installed by the user.
+DocuKit is designed around local document processing.
 
-## Credits
+Your documents are processed on your computer rather than uploaded to a cloud service by the application's core processing workflow.
 
-**by reachaul** · © 2026 · Version 1.0.0 · [GitHub](https://github.com/reachaul/docukit)
+Optional components and their dependencies may have separate installation requirements.
+
+## Contributing
+
+Contributions, suggestions, and bug reports are welcome.
+
+If you find a bug or have an idea for improvement:
+
+1. Open an issue describing the problem or suggestion.
+2. Provide steps to reproduce bugs where possible.
+3. Submit a pull request if you would like to contribute code.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes.
+
+## License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+**DocuKit**
+
+Your Documents. Your Device. Your Privacy.
+
+Made with care by **reachaul**
+
+© 2026 · Version 1.0.0
+
+</div>
