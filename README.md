@@ -206,10 +206,10 @@ Made with care by **reachaul**
 ## Screenshots
 
 ### Home
-![DocuKit Home](docs/screenshots/home.png)
+![DocuKit Home](docs/home.png)
 
 ### File Converter
-![File Converter](docs/screenshots/file-converter.png)
+![File Converter](docs/converter.png)
 
 ### PDF Toolkit
-![PDF Toolkit](docs/screenshots/pdf-toolkit.png)
+![PDF Toolkit](docs/toolkit.png)
