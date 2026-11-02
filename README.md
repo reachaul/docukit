@@ -202,3 +202,14 @@ Made with care by **reachaul**
 © 2026 · Version 1.0.0
 
 </div>
+
+## Screenshots
+
+### Home
+![DocuKit Home](docs/screenshots/home.png)
+
+### File Converter
+![File Converter](docs/screenshots/file-converter.png)
+
+### PDF Toolkit
+![PDF Toolkit](docs/screenshots/pdf-toolkit.png)
