@@ -1,0 +1,19 @@
+DocuKit Markdown Export patch
+
+Copy these files into the matching locations in your DocuKit repository:
+  app/interface.py
+  app/converters/file_converter.py
+  app/converters/markdown_exporter.py
+
+Then, from the activated project virtual environment, install:
+  python -m pip install -r requirements-markdown-export.txt
+
+The new source format is "Markdown (MD)" with targets:
+  PDF, Word (DOCX), HTML, TXT
+
+PDF export uses PySide6 Qt PrintSupport. Word export uses python-docx.
+Existing non-Markdown conversion continues to use the existing MarkItDown
+conversion path. Do not remove MarkItDown or its dependencies as part of
+this feature change.
+
+After copying, test all four Markdown export targets before rebuilding.

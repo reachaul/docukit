@@ -12,6 +12,7 @@ SUPPORTED = {
     "HTML": ["Markdown (MD)"],
     "CSV": ["Markdown (MD)"],
     "TXT": ["Markdown (MD)"],
+    "Markdown (MD)": ["PDF", "Word (DOCX)", "HTML", "TXT"],
 }
 
 EXTENSIONS = {
@@ -23,6 +24,7 @@ EXTENSIONS = {
     "HTML": {".html", ".htm"},
     "CSV": {".csv"},
     "TXT": {".txt"},
+    "Markdown (MD)": {".md", ".markdown"},
 }
 
 
@@ -33,6 +35,10 @@ def convert_files(files, source_format, target_format, output_dir):
         raise ValueError(f"Konversi {source_format} ke {target_format} belum didukung.")
 
     results = []
+    if source_format == "Markdown (MD)":
+        from app.converters.markdown_exporter import convert_markdown_files
+        return convert_markdown_files(files, target_format, output_dir)
+
     if target_format == "Markdown (MD)":
         from app.converters.markitdown_converter import MarkItDownConverter
         engine = MarkItDownConverter()

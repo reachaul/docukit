@@ -131,11 +131,30 @@ class MainWindow(QMainWindow):
         release.setObjectName("muted")
         release.setStyleSheet("font-size:9pt;color:#A0ADA7")
         side_layout.addWidget(release)
-        github = QPushButton("GitHub Repository ↗" if GITHUB_REPO_URL else "GitHub Repository · Coming soon")
+        github = QPushButton("↗  GitHub Repository")
         github.setObjectName("nav")
+        github.setCursor(Qt.PointingHandCursor)
+        github.setToolTip(GITHUB_REPO_URL)
         github.setEnabled(bool(GITHUB_REPO_URL))
+        github.setStyleSheet("""
+            QPushButton#nav {
+                color: #63D6A6;
+                text-align: left;
+                padding: 10px 8px;
+                border: 0;
+                background: transparent;
+                border-radius: 8px;
+            }
+            QPushButton#nav:hover {
+                color: #8AF0C0;
+                background: #2B4036;
+                text-decoration: underline;
+            }
+        """)
         if GITHUB_REPO_URL:
-            github.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(GITHUB_REPO_URL)))
+            github.clicked.connect(
+                lambda: QDesktopServices.openUrl(QUrl(GITHUB_REPO_URL))
+            )
         side_layout.addWidget(github)
         layout.addWidget(sidebar)
         layout.addWidget(self.stack, 1)
@@ -198,7 +217,7 @@ class MainWindow(QMainWindow):
     def file_converter(self):
         widget, layout = self.page(
             "File Converter",
-            "Choose a source format and a target format. Only available local conversions are shown.",
+            "Convert supported documents to Markdown, or convert Markdown files to PDF, Word, HTML and TXT.",
         )
         format_box = QGroupBox("Conversion format")
         form = QFormLayout(format_box)
@@ -287,7 +306,7 @@ class MainWindow(QMainWindow):
             "PNG": "#35B9CF", "WEBP": "#DC75AD", "Image (JPG/PNG/WEBP)": "#E8B94E",
             "Word (DOCX)": "#3285E8", "Excel (XLSX)": "#20A66A",
             "PowerPoint (PPTX)": "#E87942", "HTML": "#E56B35",
-            "CSV": "#21A6A1", "TXT": "#A0AAB3"
+            "CSV": "#21A6A1", "TXT": "#A0AAB3", "Markdown (MD)": "#A78BFA"
         }
         for index in range(combo.count()):
             color = palette.get(combo.itemText(index))
