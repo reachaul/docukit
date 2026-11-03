@@ -1,215 +1,245 @@
-<div align="center">
-
 # DocuKit
 
-### Your Documents. Your Device. Your Privacy.
+**Your Documents. Your Device. Your Privacy.**
 
-A privacy-focused desktop document toolkit for Windows.
+DocuKit is a privacy-focused desktop document toolkit for Windows. It brings common document conversion and PDF management tasks into one simple application, with core processing performed locally on your device.
 
-Convert documents, manage PDFs, and handle your files locally — without uploading your documents to cloud services.
-
-**Made with care by reachaul**
-
-[Features](#features) · [Installation](#installation) · [Usage](#usage) · [Build](#building-from-source) · [Contributing](#contributing)
-
-</div>
+**Version:** 1.1.0  
+**Platform:** Windows 10/11 (64-bit)  
+**Developer:** by reachaul  
+**Copyright:** © 2026
 
 ---
 
-## About DocuKit
+## What's New in v1.1.0
 
-**DocuKit** is a Windows desktop application designed to make everyday document management easier, combining document conversion and PDF utilities in one place.
+### Markdown export
 
-Built with **Python** and **PySide6**, DocuKit provides a modern desktop interface while keeping document processing on your own computer.
+DocuKit now supports converting Markdown (`.md` and `.markdown`) files into:
 
-### Key Highlights
+- **PDF** (`.pdf`)
+- **Microsoft Word** (`.docx`)
+- **HTML** (`.html`)
+- **Plain Text** (`.txt`)
 
-* **Privacy-focused** — Document processing is designed to happen locally on your device.
-* **All-in-one toolkit** — Document conversion and PDF utilities in one application.
-* **Modern interface** — Clean desktop UI with drag-and-drop and file browsing.
-* **Offline-oriented** — No cloud upload is required for the application's core local processing features.
+This complements the existing document-to-Markdown workflow. Markdown export is available from the **File Converter** page: select **Markdown (MD)** as the source format, choose an output format, add one or more files, select an output folder, and convert.
+
+> Markdown export availability depends on the v1.1.0 application build and its installed dependencies. Test the conversion workflow before distributing a packaged build.
+
+---
 
 ## Features
 
-### 1. File Converter
+### File Converter
 
-Convert supported document and image formats.
+Convert supported source files to Markdown, and export Markdown files to other formats.
 
-| Conversion                        | Availability                              |
-| --------------------------------- | ----------------------------------------- |
-| PDF to JPG / PNG                  | Available                                 |
-| JPG / PNG / WEBP to PDF           | Available                                 |
-| JPG / PNG / WEBP image conversion | Available                                 |
-| PDF to Markdown                   | Available with optional MarkItDown engine |
-| DOCX to Markdown                  | Available with optional MarkItDown engine |
-| XLSX to Markdown                  | Available with optional MarkItDown engine |
-| PPTX to Markdown                  | Available with optional MarkItDown engine |
-| HTML / CSV / TXT to Markdown      | Available with optional MarkItDown engine |
+**To Markdown:**
+- PDF
+- Word (`.docx`)
+- Excel (`.xlsx`)
+- PowerPoint (`.pptx`)
+- HTML
+- CSV
+- TXT
+- Supported images and other formats handled by the installed MarkItDown converters
 
-### 2. PDF Toolkit
+**From Markdown:**
+- Markdown to PDF
+- Markdown to Word (`.docx`)
+- Markdown to HTML
+- Markdown to TXT
 
-Manage PDF documents with practical utilities:
+**Additional conversion tools:**
+- PDF to JPG
+- PDF to PNG
+- Images (JPG/PNG/WEBP) to PDF
+- Image format conversion to JPG or PNG
 
-* Merge PDF files
-* Split PDF documents
-* Extract selected pages
-* Remove unwanted pages
-* Rotate pages
-* Reorder pages
-* Compress and optimize PDF files
+The available conversions are shown dynamically in the File Converter interface.
 
-### 3. Additional Tools
+### PDF Toolkit
 
-The application interface also includes sections for OCR Tools and PDF Editor. These are planned for future development and are not yet available as functional tools in version 1.0.0.
+- Merge PDF files
+- Split PDF files
+- Extract selected pages
+- Remove selected pages
+- Rotate pages
+- Reorder pages
+- Compress PDF files
 
-## Technology Stack
+### OCR Tools
 
-* **Python 3.15** — Application development environment
-* **PySide6** — Desktop graphical user interface
-* **PyMuPDF** — PDF processing
-* **Pillow** — Image processing
-* **MarkItDown** — Optional document-to-Markdown conversion
-* **PyInstaller** — Windows executable packaging
+The OCR workspace is part of the application interface. Local OCR functionality requires a compatible Tesseract OCR installation and language data. Check the current application build for the tools enabled in that release.
+
+### PDF Editor
+
+The PDF Editor workspace is reserved for features planned for future releases. Not all editing tools are currently implemented.
+
+---
+
+## Privacy and Offline Use
+
+DocuKit is designed around local document processing. Core PDF operations and supported local conversions are performed on the user's computer.
+
+Some optional conversion integrations or services may require internet access or external credentials if configured. OCR also requires a local Tesseract installation. Do not treat every optional integration as offline-capable.
+
+Your documents are not intentionally uploaded to a DocuKit cloud service.
+
+---
 
 ## Installation
 
-### Requirements
+### Windows release
 
-* Windows 10 or Windows 11
-* Python 3.15 for running from source
+1. Download the Windows x64 ZIP package from the [GitHub Releases](https://github.com/reachaul/docukit/releases) page.
+2. Extract the ZIP file to a folder of your choice.
+3. Open the extracted `DocuKit` folder.
+4. Run `DocuKit.exe`.
 
-### 1. Clone the repository
+Keep the extracted application folder structure intact. Do not move the EXE out of its accompanying `_internal` folder.
+
+### Run from source
+
+Requirements:
+- Windows 10/11, 64-bit
+- Python version compatible with the dependencies listed in the project requirements
+
+Clone the repository:
 
 ```powershell
 git clone https://github.com/reachaul/docukit.git
 cd docukit
 ```
 
-### 2. Create a virtual environment
+Create and activate a virtual environment:
 
 ```powershell
-py -3.15 -m venv .venv
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+Install the base dependencies:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-### 4. Optional components
-
-For additional document-to-Markdown conversion support:
+Install the converter dependencies:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-converter.txt
+python -m pip install -r requirements-converter.txt
 ```
 
-OCR dependencies can be installed separately. Tesseract OCR must also be installed on Windows. Note that the OCR interface is not yet functional in version 1.0.0.
+For Markdown export, install the additional dependencies:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-ocr.txt
+python -m pip install Markdown python-docx
 ```
 
-## Usage
-
-Run DocuKit from the project directory:
+Run the application:
 
 ```powershell
-.\.venv\Scripts\python.exe -m app.main
+python launcher.py
 ```
 
-Once the application opens:
-
-1. Select File Converter or PDF Toolkit.
-2. Add files using Browse or drag-and-drop.
-3. Select the desired operation.
-4. Configure the available options.
-5. Process and save the output to your chosen location.
-
-## Building from Source
-
-DocuKit uses PyInstaller to package the application for Windows.
-
-Install the build dependencies:
+If PowerShell blocks activation, run this command in the current terminal and activate again:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-converter.txt
-.\.venv\Scripts\python.exe -m pip install -r requirements-build.txt
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
-
-Build the application:
-
-```powershell
-.\.venv\Scripts\pyinstaller.exe --clean --noconfirm DocuKit.spec
-```
-
-The build output is generated in:
-
-```text
-dist/DocuKit/
-```
-
-The resulting build should be tested on a separate Windows environment before distribution.
-
-## Project Status
-
-| Component                       | Status    |
-| ------------------------------- | --------- |
-| File Converter                  | Available |
-| PDF Toolkit                     | Available |
-| OCR Tools                       | Planned   |
-| PDF Editor                      | Planned   |
-| Windows executable distribution | Pending   |
-
-DocuKit is currently at **version 1.0.0**.
-
-## Privacy
-
-DocuKit is designed around local document processing.
-
-Your documents are processed on your computer rather than uploaded to a cloud service by the application's core processing workflow.
-
-Optional components and their dependencies may have separate installation requirements.
-
-## Contributing
-
-Contributions, suggestions, and bug reports are welcome.
-
-If you find a bug or have an idea for improvement:
-
-1. Open an issue describing the problem or suggestion.
-2. Provide steps to reproduce bugs where possible.
-3. Submit a pull request if you would like to contribute code.
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes.
-
-## License
-
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 ---
 
-<div align="center">
+## Build the Windows Application
 
-**DocuKit**
+Install build dependencies:
 
-Your Documents. Your Device. Your Privacy.
+```powershell
+python -m pip install -r requirements-build.txt
+```
 
-Made with care by **reachaul**
+Build with PyInstaller:
 
-© 2026 · Version 1.0.0
+```powershell
+python -m PyInstaller --clean --noconfirm DocuKit.spec
+```
 
-</div>
+The packaged application will be created in:
 
-## Screenshots
+```text
+dist\DocuKit\
+```
 
-### Home
-![DocuKit Home](docs/home.png)
+Run `dist\DocuKit\DocuKit.exe` to test the build. Distribute the complete `DocuKit` folder as a ZIP archive; do not distribute the EXE by itself.
 
-### File Converter
-![File Converter](docs/converter.png)
+---
 
-### PDF Toolkit
-![PDF Toolkit](docs/toolkit.png)
+## Project Structure
+
+```text
+docukit/
+├── app/
+│   ├── converters/
+│   ├── interface.py
+│   └── main.py
+├── assets/
+│   └── fonts/
+├── launcher.py
+├── DocuKit.spec
+├── requirements.txt
+├── requirements-converter.txt
+├── requirements-build.txt
+├── README.md
+└── LICENSE
+```
+
+The exact project structure may evolve between releases.
+
+---
+
+## Known Limitations
+
+- Conversion fidelity depends on the source document structure and the selected output format.
+- Complex layouts, embedded objects, advanced tables, and some styling may not be reproduced exactly when converting between formats.
+- OCR requires Tesseract OCR to be installed separately, with the required language data.
+- Some workspaces or tools may be placeholders until a future release.
+- The packaged application should be tested on a clean Windows environment before broad distribution.
+
+---
+
+## Roadmap
+
+Potential areas for future development:
+
+- Expand PDF editing capabilities.
+- Improve OCR workflow and language selection.
+- Improve conversion fidelity for tables, images, and complex layouts.
+- Reduce packaged application size through modular dependencies.
+- Add more document formats and batch-processing improvements.
+
+---
+
+## Contributing
+
+Suggestions, bug reports, and contributions are welcome.
+
+Please include the following when reporting an issue:
+- DocuKit version
+- Windows version
+- Source and target file formats
+- Steps to reproduce the issue
+- Error message or screenshot, if available
+
+---
+
+## License
+
+See the [LICENSE](LICENSE) file for license details.
+
+---
+
+**DocuKit**  
+*Your Documents. Your Device. Your Privacy.*  
+**by reachaul**
